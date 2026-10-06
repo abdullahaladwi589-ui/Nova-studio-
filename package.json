@@ -1,0 +1,26 @@
+{
+  "name": "nova-studio",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm:server\" \"npm:web\"",
+    "server": "node server/index.js",
+    "web": "vite web --host 0.0.0.0",
+    "start": "node server/index.js"
+  },
+  "dependencies": {
+    "@fal-ai/client": "latest",
+    "cors": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "jsonwebtoken": "latest",
+    "multer": "latest",
+    "better-sqlite3": "latest",
+    "bcryptjs": "latest",
+    "stripe": "latest"
+  },
+  "devDependencies": {
+    "concurrently": "latest",
+    "vite": "latest"
+  },
+  "type": "module"
+}
