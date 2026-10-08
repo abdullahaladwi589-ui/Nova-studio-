@@ -112,5 +112,7 @@ app.patch('/api/admin/users/:id/plan',auth,ownerOnly,(req,res)=>{const plan=['fr
 app.post('/api/admin/settings',auth,ownerOnly,(req,res)=>{if(req.body.plusPriceLabel)setSetting('plus_price_label',req.body.plusPriceLabel);res.json({ok:true,plusPrice:setting('plus_price_label')});});
 
 app.use(express.static('web'));
-app.get('*',(req,res)=>res.sendFile(path.resolve('web/index.html')));
+app.use((req,res)=>{
+  res.status(404).json({error:'Not Found'});
+});
 app.listen(PORT,()=>console.log(`NOVA backend listening on ${PORT}`));
