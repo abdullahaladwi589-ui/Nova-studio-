@@ -111,7 +111,13 @@ app.get('/api/admin/users',auth,ownerOnly,(req,res)=>res.json(db.prepare('SELECT
 app.patch('/api/admin/users/:id/plan',auth,ownerOnly,(req,res)=>{const plan=['free','plus','owner'].includes(req.body.plan)?req.body.plan:null;if(!plan)return res.status(400).json({error:'خطة غير صالحة'});db.prepare('UPDATE users SET plan=? WHERE id=?').run(plan,req.params.id);res.json({ok:true});});
 app.post('/api/admin/settings',auth,ownerOnly,(req,res)=>{if(req.body.plusPriceLabel)setSetting('plus_price_label',req.body.plusPriceLabel);res.json({ok:true,plusPrice:setting('plus_price_label')});});
 
-app.use(express.static('web'));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'index.html'));
+});
+
+app.get('/src.js', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'src.js'));
+});
 app.use((req,res)=>{
   res.status(404).json({error:'Not Found'});
 });
